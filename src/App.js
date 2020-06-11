@@ -8,6 +8,7 @@ import Settings from "./components/settings";
 
 class App extends Component {
   state = {};
+
   render() {
     return (
       <React.Fragment>

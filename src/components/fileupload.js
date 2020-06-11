@@ -6,44 +6,58 @@ class FileUpload extends Component {
     this.state = {
       selectedFile: null,
       loaded: 0,
+      fileContents: "",
     };
   }
 
   onChangeHandler = (event) => {
-    console.log(event.target.files[0]);
+    this.setState({
+      selectedFile: event.target.files[0],
+      loaded: 0,
+    });
   };
 
   onClickHandler = () => {
-    const data = new FormData();
-    data.append("file", this.state.selectedFile);
-    console.log(data);
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      this.setState({ fileContents: reader.result });
+      const hostArray = this.state.fileContents.toString().split("\n");
+      for (let i in hostArray) {
+        console.log(hostArray[i]);
+      }
+    };
+
+    reader.readAsText(this.state.selectedFile);
   };
 
   render() {
     return (
       <div className="container">
-        <form>
-          <h3>File upload</h3>
+        <h3>File upload</h3>
+        <div className="input-group">
           <div className="custom-file">
             <input
-              name="file"
               type="file"
               className="custom-file-input"
               onChange={this.onChangeHandler}
-              id="customFile"
+              id="inputfile01"
+              accept=".txt"
             />
-            <label className="custom-file-label" htmlFor="customFile">
+            <label className="custom-file-label" htmlFor="inputfile01">
               Choose file
             </label>
           </div>
+        </div>
+        <div>
           <button
-            type="submit"
+            type="button"
             className="btn btn-secondary btn-block"
             onClick={this.onClickHandler}
           >
             Upload
           </button>
-        </form>
+        </div>
       </div>
     );
   }

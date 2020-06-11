@@ -3,7 +3,23 @@ import React, { Component } from "react";
 class AddSwitch extends Component {
   state = {};
   render() {
-    return <h1>hej</h1>;
+    <React.Fragment>
+      <tr>
+        <th scope="col"></th>
+        <th scope="col">
+          <input type="text" />
+        </th>
+        <th scope="col">
+          <input type="text" />
+        </th>
+        <th scope="col">
+          <input type="text" />
+        </th>
+        <th scope="col">
+          <input type="text" />
+        </th>
+      </tr>
+    </React.Fragment>;
   }
 }
 
