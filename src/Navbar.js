@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
-class NavBar extends Component {
+class Navbar extends Component {
   render() {
     return (
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <Link className="navbar-brand" to="/">
-          SwitchList
+          Switches
         </Link>
         <div>
           <ul className="navbar-nav mr-auto">
@@ -16,7 +16,7 @@ class NavBar extends Component {
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/FileUpload">
+              <Link className="nav-link" to="/SwitchUpload">
                 Upload
               </Link>
             </li>
@@ -32,4 +32,4 @@ class NavBar extends Component {
   }
 }
 
-export default NavBar;
+export default Navbar;

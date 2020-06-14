@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 import { Route, Switch, Redirect } from "react-router-dom";
-import NavBar from "./components/navbar";
-import NetworkSwitches from "./components/networkswitches";
-import FileUpload from "./components/fileupload";
-import Settings from "./components/settings";
+import Navbar from "./Navbar";
+import Switches from "./Switches/Switches";
+import SwitchUpload from "./SwitchUpload/SwitchUpload";
+import Settings from "./Settings/Settings";
 
 class App extends Component {
   state = {};
@@ -13,13 +13,13 @@ class App extends Component {
     return (
       <React.Fragment>
         <Router>
-          <NavBar />
+          <Navbar />
           <Switch>
             <Route exact path="/">
-              <Redirect to="/NetworkSwitches" />
+              <Redirect to="/Switches" />
             </Route>
-            <Route exact path="/NetworkSwitches" component={NetworkSwitches} />
-            <Route exact path="/FileUpload" component={FileUpload} />
+            <Route exact path="/Switches" component={Switches} />
+            <Route exact path="/SwitchUpload" component={SwitchUpload} />
             <Route exact path="/Settings" component={Settings} />
           </Switch>
         </Router>
