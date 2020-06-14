@@ -12,13 +12,17 @@ class Switches extends Component {
   };
 
   componentDidMount() {
+    this.handlePullData();
+  }
+
+  handlePullData = () => {
     fetch("http://localhost:5000/api/NetworkSwitches")
       .then((res) => res.json())
       .then((data) => {
         this.setState({ networkSwitches: data });
       })
       .catch(console.log);
-  }
+  };
 
   toggleAdd = () => {
     this.setState((oldState) => ({
@@ -37,29 +41,33 @@ class Switches extends Component {
   };
 
   handleDelete = (networkSwitchID) => {
-    console.log("Delete switch ID: " + networkSwitchID);
+    fetch("http://localhost:5000/api/NetworkSwitches/" + networkSwitchID, {
+      method: "DELETE",
+    })
+      .then((response) => response.text()) // or res.json()
+      .then((response) => {
+        console.log(response);
+        this.handlePullData();
+      })
+      .catch(console.log);
   };
 
   handleAdd = () => {
     // TODO: Check for OK
-
     fetch("http://localhost:5000/api/NetworkSwitches", {
-      method: "post",
+      method: "POST",
       headers: {
-        Accept: "application/json",
         "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
       },
       body: JSON.stringify(this.state.newSwitch),
     })
-      .then(function (response) {
-        return response.json(); //response.json() is resolving its promise. It waits for the body to load
+      .then((response) => response.text()) // or res.json()
+      .then((response) => {
+        console.log(response);
+        this.toggleAdd();
+        this.handlePullData();
       })
-      .then(function (responseData) {
-        console.log(responseData);
-        // Do something with the response
-      });
-    //console.log(JSON.stringify(this.state.newSwitch));
+      .catch(console.log);
   };
 
   render() {
@@ -114,33 +122,3 @@ class Switches extends Component {
 }
 
 export default Switches;
-
-/*
-      https://stackoverflow.com/questions/51144410/react-js-fetch-api-posting
-
-  
-  handleAdd = (networkSwitch) => {
-    event.preventDefault();
-    console.log(this.refs.first_name.value);
-    fetch("/", {
-      method: "post",
-      body: {
-        first_name: this.refs.first_name.value,
-      },
-    });
-  };
-
-  
-  handleAdd = () => {
-    networkSwitch = this.state.networkSwitch;
-    networkSwitch += { id: 999, name: "hoho", domain: "", ip: "" };
-    this.setState(networkSwitch);
-  };
-
-  handleDelete = (networkSwitchID) => {
-    const networkSwitches = this.state.networkSwitches.filter(
-      (ns) => ns.id !== networkSwitchID
-    );
-    this.setState({ networkSwitches });
-  };
-*/
