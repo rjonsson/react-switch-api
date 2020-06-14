@@ -4,19 +4,21 @@ const Switch = (props) => {
   return (
     <React.Fragment>
       <tr>
-        <th scope="col">{props.networkSwitch.id}</th>
-        <th scope="col">
+        <th scope="row">{props.networkSwitch.id}</th>
+        <td>
           {props.networkSwitch.name}.{props.networkSwitch.domain}
-        </th>
-        <th scope="col">{props.networkSwitch.ip}</th>
-        <th scope="col">{props.networkSwitch.ports.length}</th>
-        <th scope="col">
+        </td>
+        <td>{props.networkSwitch.ip}</td>
+        <td>{props.networkSwitch.ports.length}</td>
+        <td>
           <button
             onClick={() => props.onDelete(props.networkSwitch.id)}
             type="button"
-            className="btn btn-danger"
-          />
-        </th>
+            className="btn btn-danger btn-sm"
+          >
+            Delete
+          </button>
+        </td>
       </tr>
     </React.Fragment>
   );

@@ -8,21 +8,12 @@ class Switches extends Component {
     networkSwitches: [],
     showAdd: false,
     newSwitch: { name: "", domain: "", ip: "", status: 0, ports: [] },
-    //newSwitch: "",
+    apiUrl: "http://localhost:5000/api/NetworkSwitches/",
   };
 
   componentDidMount() {
     this.handlePullData();
   }
-
-  handlePullData = () => {
-    fetch("http://localhost:5000/api/NetworkSwitches")
-      .then((res) => res.json())
-      .then((data) => {
-        this.setState({ networkSwitches: data });
-      })
-      .catch(console.log);
-  };
 
   toggleAdd = () => {
     this.setState((oldState) => ({
@@ -40,8 +31,17 @@ class Switches extends Component {
     console.log(this.state.newSwitch);
   };
 
+  handlePullData = () => {
+    fetch(this.state.apiUrl)
+      .then((res) => res.json())
+      .then((data) => {
+        this.setState({ networkSwitches: data });
+      })
+      .catch(console.log);
+  };
+
   handleDelete = (networkSwitchID) => {
-    fetch("http://localhost:5000/api/NetworkSwitches/" + networkSwitchID, {
+    fetch(this.state.apiUrl + networkSwitchID, {
       method: "DELETE",
     })
       .then((response) => response.text()) // or res.json()
@@ -54,7 +54,7 @@ class Switches extends Component {
 
   handleAdd = () => {
     // TODO: Check for OK
-    fetch("http://localhost:5000/api/NetworkSwitches", {
+    fetch(this.state.apiUrl, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
