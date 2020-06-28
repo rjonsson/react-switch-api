@@ -16,7 +16,7 @@ class Navbar extends Component {
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/SwitchUpload">
+              <Link className="nav-link" to="/Upload">
                 Upload
               </Link>
             </li>

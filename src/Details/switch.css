@@ -1,0 +1,52 @@
+
+.maincontent {
+}
+
+.subcontent {
+  display: flex;
+}
+
+table {
+  margin-top: 20px;
+  margin-left: 70px;
+  font-size: 12px;
+  display: table;
+  box-sizing: border-box;
+  text-align: left;
+  border-collapse: collapse;
+}
+
+th {
+  text-transform: uppercase;
+  background: #dbdbdb;  
+}
+
+th, td {
+  padding: 3px;
+  margin-left: 20px;
+  border: 1px solid #e9e9e9;
+}
+
+
+.device {
+  background-color: #dbdbdb;
+  width: 780px;
+  height: 60px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: flex-start; 
+}
+
+.port {
+  width: 30px
+}
+
+.port:hover {
+  filter: 
+    invert(0.5)
+    sepia(1)
+    hue-rotate(170deg)
+    saturate(4)
+    brightness(1);
+}

@@ -1,14 +1,15 @@
 import React, { Component } from "react";
-import Switch from "./Switch";
-import SwitchDetails from "./SwitchDetails";
+import SwitchRow from "./SwitchRow";
 import SwitchAdd from "./SwitchAdd";
 
 class Switches extends Component {
   state = {
     networkSwitches: [],
     showAdd: false,
+    showDetails: false,
     newSwitch: { name: "", domain: "", ip: "", status: 0, ports: [] },
     apiUrl: "http://localhost:5000/api/NetworkSwitches/",
+    //selectedSwitches: [],
   };
 
   componentDidMount() {
@@ -28,7 +29,6 @@ class Switches extends Component {
     }));
     // TODO: Keep error-label until it satisfies standard
     // TODO: Add check-property to OK for handleAdd
-    console.log(this.state.newSwitch);
   };
 
   handlePullData = () => {
@@ -72,7 +72,7 @@ class Switches extends Component {
 
   render() {
     return (
-      <div className="container mt-4">
+      <div className="wrapper">
         <div className="row">
           <div className="col">
             <h3>Switches</h3>
@@ -84,6 +84,12 @@ class Switches extends Component {
             >
               +
             </button>
+            <button
+              className="btn btn-secondary btn-sm"
+              onClick={() => this.toggleDetails()}
+            >
+              D
+            </button>
           </div>
         </div>
         <div className="row">
@@ -92,8 +98,9 @@ class Switches extends Component {
               <tr>
                 <th scope="col">#</th>
                 <th scope="col">Hostname</th>
-                <th scope="col">IP</th>
-                <th scope="col">Ports</th>
+                <th scope="col">Model</th>
+                <th scope="col">Reachable</th>
+                <th scope="col">Sync</th>
                 <th scope="col"></th>
               </tr>
             </thead>
@@ -107,10 +114,11 @@ class Switches extends Component {
               )}
 
               {this.state.networkSwitches.map((networkSwitch) => (
-                <Switch
+                <SwitchRow
                   key={networkSwitch.id}
                   onDelete={this.handleDelete}
                   networkSwitch={networkSwitch}
+                  toggleDetails={this.toggleDetails}
                 />
               ))}
             </tbody>
